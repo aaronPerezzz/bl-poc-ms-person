@@ -95,17 +95,18 @@ API encargada de administrar información de una persona.
 
 - Visual Studio 2022
 - .NET 8 SDK
+- Docker
 
 ## Instalación
 
     Descargar codigo fuente en Git
-    ```sh
+    ```bash
     git clone https://github.com/aaronPerezzz/bl-poc-ms-person
     ```
 
 ## Despligue
 
     Ejecutar el siguiente comando
-    ```sh
+    ```bash
     docker-compose -f docker-compose.yaml up
     ```
