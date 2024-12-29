@@ -1,0 +1,6 @@
+@bl_poc_ms_person_HostAddress = http://localhost:5296
+
+GET {{bl_poc_ms_person_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

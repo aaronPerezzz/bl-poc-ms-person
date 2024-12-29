@@ -1,0 +1,12 @@
+{
+  "Version": 1,
+  "Hash": "obqWcBNcQBevVojo4+Y0hj3/uLSQB5h5WdAJUwThwkE=",
+  "Source": "bl-poc-ms-person",
+  "BasePath": "_content/bl-poc-ms-person",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": [],
+  "Endpoints": []
+}

@@ -1,0 +1,30 @@
+version: '3.9'
+
+volumes:
+  datafiles:
+
+services:
+  database:
+    image: mysql:9.1.0
+    environment:
+      MYSQL_ROOT_PASSWORD: admin
+      MYSQL_PASSWORD: admin
+      MYSQL_DATABASE: bl-poc-ms-person
+    ports:
+      - "3307:3306"
+    volumes:
+      - datafiles:/var/lib/mysql
+      - ./sql-scripts/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+    restart: always
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - database
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+
