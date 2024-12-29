@@ -99,14 +99,14 @@ API encargada de administrar información de una persona.
 
 ## Instalación
 
-    Descargar codigo fuente en Git
-    ```bash
-    git clone https://github.com/aaronPerezzz/bl-poc-ms-person
-    ```
+Descargar codigo fuente en Git
+```bash
+  git clone https://github.com/aaronPerezzz/bl-poc-ms-person
+```
 
 ## Despligue
 
-    Ejecutar el siguiente comando
-    ```bash
-    docker-compose -f docker-compose.yaml up
-    ```
+Ejecutar el siguiente comando
+```bash
+  docker-compose -f docker-compose.yaml up
+  ```
