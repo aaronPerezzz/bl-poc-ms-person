@@ -108,5 +108,7 @@ Descargar codigo fuente en Git
 
 Ejecutar el siguiente comando
 ```bash
-  docker-compose -f docker-compose.yaml up
-  ```
+ docker-compose -f docker-compose.yaml up
+```
+  
+  

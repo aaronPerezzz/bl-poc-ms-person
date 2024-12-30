@@ -6,6 +6,7 @@ volumes:
 services:
   database:
     image: mysql:9.1.0
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: admin
       MYSQL_PASSWORD: admin
@@ -14,17 +15,23 @@ services:
       - "3307:3306"
     volumes:
       - datafiles:/var/lib/mysql
-      - ./sql-scripts/setup.sql:/docker-entrypoint-initdb.d/setup.sql
-    restart: always
+      - ../sql-scripts/setup.sql:/docker-entrypoint-initdb.d/setup.sql
+    healthcheck:
+      test: ['CMD-SHELL', 'mysqladmin ping -h 127.0.0.1 --password="" --silent']
+      interval: 3s
+      retries: 5
+      start_period: 30s
   api:
     build:
       context: .
       dockerfile: Dockerfile
     depends_on:
-      - database
+      database:
+        condition: service_healthy
+        restart: true
     restart: always
     ports:
-      - "8888:80"
+      - "8888:8080"  
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
 

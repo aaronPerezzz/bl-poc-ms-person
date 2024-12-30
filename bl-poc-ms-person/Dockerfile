@@ -1,19 +1,27 @@
 #Get .Net Core image
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS base
+USER app
+WORKDIR /app
+EXPOSE 8080
+EXPOSE 8081
+
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
-WORKDIR /app
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src/bl-poc-ms-person
+COPY ["./bl-poc-ms-person.csproj", "bl-poc-ms-person/"] 
+RUN dotnet restore "./bl-poc-ms-person.csproj"
+COPY . .
 
-#Copying csproj and restore
-COPY *.csproj ./
-RUN dotnet restore
-
+RUN dotnet build "./bl-poc-ms-person.csproj" -c $BUILD_CONFIGURATION -o /app/build
 #Copying the rest of the files and build
-COPY . ./
-RUN dotnet publish -c Release -o out
 
-#Runtime
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./bl-poc-ms-person.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
 WORKDIR /app
-COPY --from=build /app/out .
-EXPOSE 80/tcp
+COPY --from=publish /app/publish .
+
 
 ENTRYPOINT ["dotnet", "bl-poc-ms-person.dll"]
